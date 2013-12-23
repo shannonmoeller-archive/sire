@@ -32,5 +32,19 @@
     "load-grunt-tasks": "~0.2.1",
     "mocha": "~1.16.1",
     "time-grunt": "~0.2.5"
+  },
+  "testling": {
+    "harness": "mocha",
+    "scripts": "test/index.js",
+    "browsers": [
+      "chrome": [30, 31, "canary"],
+      "firefox": [24, 25, "nightly"],
+      "ie": [8, 9, 10, 11],
+      "opera": [16, 17, "next"],
+      "safari": [5.1, 6.0],
+      "android": [4.2],
+      "ipad": [6],
+      "iphone": [6]
+    ]
   }
 }
