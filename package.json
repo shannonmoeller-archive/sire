@@ -36,7 +36,7 @@
   "testling": {
     "harness": "mocha",
     "scripts": "test/index.js",
-    "browsers": [
+    "browsers": {
       "chrome": [30, 31, "canary"],
       "firefox": [24, 25, "nightly"],
       "ie": [8, 9, 10, 11],
@@ -45,6 +45,6 @@
       "android": [4.2],
       "ipad": [6],
       "iphone": [6]
-    ]
+    }
   }
 }
