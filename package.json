@@ -37,14 +37,14 @@
     "harness": "mocha",
     "scripts": "test/index.js",
     "browsers": [
-      "chrome/30..canary",
-      "firefox/24..nightly",
+      "chrome/30..latest",
+      "firefox/24..latest",
       "ie/8..latest",
-      "opera/16..next",
+      "opera/16..latest",
       "safari/5..latest",
-      "android/latest",
-      "ipad/latest",
-      "iphone/latest"
+      "android/2..latest",
+      "ipad/5..latest",
+      "iphone/5..latest"
     ]
   }
 }
