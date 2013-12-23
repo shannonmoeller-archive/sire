@@ -1,0 +1,7 @@
+{
+  "name": "sire",
+  "version": "0.0.0",
+  "description": "Module husbandry.",
+  "main": "index.js",
+  "ignore": ["./!(index.js)"]
+}
