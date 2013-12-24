@@ -170,17 +170,20 @@ describe('Sire', function() {
 
             var A = {};
             var B = function() {};
-            function C() {}
+            var C = { name: 'C' };
+            function D() {}
 
             app
                 .use('A', A)
                 .use('B', B)
-                .use(C);
+                .use(C)
+                .use(D);
 
             assert.deepEqual(app._modules, {
                 'A': A,
                 'B': B,
-                'C': C
+                'C': C,
+                'D': D
             });
         });
     });

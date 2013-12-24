@@ -38,7 +38,7 @@ With [Component](http://component.io):
 
 ## API for Sire Implementors
 
-### `_start( module, [options] ) : Object`
+### `_start( module, [options] ) : instance`
 
 - `module` `Object | Function`
 - `options` `Object` _(optional)_
