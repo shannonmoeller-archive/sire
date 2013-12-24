@@ -2,11 +2,19 @@
 'use strict';
 
 /**
+ * JavaScript module husbandry. Base class for modules, such as applications and
+ * controllers, that will be responsible for managing the lifecycle of other
+ * modules, such as models, views, or child controllers. How modules are started
+ * and stopped is determined by the implementing class via `_start` and `_stop`
+ * methods.
+ *
  * @class Sire
  * @constructor
  */
 function Sire() {
     /**
+     * Used modules.
+     *
      * @property _modules
      * @type Object
      * @private
@@ -14,6 +22,8 @@ function Sire() {
     this._modules = {};
 
     /**
+     * Started modules.
+     *
      * @property _started
      * @type Object
      * @private
@@ -22,6 +32,8 @@ function Sire() {
 }
 
 /**
+ * Starts some or all registered modules.
+ *
  * @method start
  * @param {Object} [arg]*
  * @param {String} arg.name
@@ -35,6 +47,9 @@ Sire.prototype.start = function() {
     var modules = this._modules;
     var started = this._started;
     var length = arguments.length;
+
+    // Stop using
+    delete this.use;
 
     // Start all known modules
     if (length === 0) {
@@ -63,15 +78,19 @@ Sire.prototype.start = function() {
 };
 
 /**
+ * Starts a registered module. Sub classes must implement this method.
+ *
  * @method _start
- * @param {Function} Module
+ * @param {Function} module
  * @param {Object} [options]
  */
-Sire.prototype._start = function(/* Module, options */) {
+Sire.prototype._start = function(/* module, options */) {
     throw new Error('not implemented');
 };
 
 /**
+ * Stops some or all started modules.
+ *
  * @method stop
  * @param {Object} [arg]*
  * @chainable
@@ -83,7 +102,7 @@ Sire.prototype.stop = function() {
     var started = this._started;
     var length = arguments.length;
 
-    // Stop all known modules
+    // Stop all started modules
     if (length === 0) {
         i = started.length;
 
@@ -98,7 +117,7 @@ Sire.prototype.stop = function() {
         return this;
     }
 
-    // Stop specific modules
+    // Stop specific started modules
     for (i = 0; i < length; i++) {
         instance = arguments[i];
         index = started.indexOf(instance);
@@ -114,6 +133,8 @@ Sire.prototype.stop = function() {
 };
 
 /**
+ * Stops a started module. Sub classes must implement this method.
+ *
  * @method _stop
  * @param {Object} instance
  */
@@ -122,6 +143,8 @@ Sire.prototype._stop = function(/* instance */) {
 };
 
 /**
+ * Registers a module to be sired.
+ *
  * @method use
  * @param {String|Object} name
  * @param {Object} [module]
@@ -133,7 +156,15 @@ Sire.prototype.use = function(name, module) {
         name = module.name;
     }
 
-    this._modules[module.name] = module;
+    if (name === undefined || name === '') {
+        throw new Error('invalid module name');
+    }
+
+    if (module === undefined) {
+        throw new Error('invalid module');
+    }
+
+    this._modules[name] = module;
 
     return this;
 };
