@@ -48,9 +48,6 @@ Sire.prototype.start = function() {
     var started = this._started;
     var length = arguments.length;
 
-    // Stop using
-    delete this.use;
-
     // Start all known modules
     if (length === 0) {
         for (i in modules) {
@@ -112,6 +109,7 @@ Sire.prototype.stop = function() {
             this._stop(instance);
         }
 
+        // Empty array
         started.length = 0;
 
         return this;
@@ -156,11 +154,11 @@ Sire.prototype.use = function(name, module) {
         name = module.name;
     }
 
-    if (name === undefined || name === '') {
-        throw new Error('invalid module name');
+    if (name == null || name === '') {
+        throw new Error('invalid name');
     }
 
-    if (module === undefined) {
+    if (module == null) {
         throw new Error('invalid module');
     }
 

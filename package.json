@@ -1,6 +1,6 @@
 {
   "name": "sire",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Module husbandry.",
   "main": "index.js",
   "scripts": {
@@ -38,7 +38,7 @@
     "scripts": "test/index.js",
     "browsers": {
       "chrome": [30, 31, "canary"],
-      "firefox": [24, 25, "nightly"],
+      "ff": [24, 25, "nightly"],
       "ie": [8, 9, 10, 11],
       "opera": [16, 17, "next"],
       "safari": [5.1, 6.0],

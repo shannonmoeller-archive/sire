@@ -130,13 +130,15 @@ describe('Sire', function() {
 
             app._started = [{}];
 
-            assert.throws(function() {
-                app._stop();
-            });
+            assert.throws(
+                function() { app._stop(); },
+                /not implemented/
+            );
 
-            assert.throws(function() {
-                app.stop();
-            });
+            assert.throws(
+                function() { app.stop(); },
+                /not implemented/
+            );
         });
     });
 
@@ -144,25 +146,37 @@ describe('Sire', function() {
         it('should throw an invalid-name error', function() {
             var app = new Sire();
 
-            assert.throws(function() {
-                app.use();
-            });
+            assert.throws(
+                function() { app.use(); },
+                /invalid name/
+            );
 
-            assert.throws(function() {
-                app.use({});
-            });
+            assert.throws(
+                function() { app.use({}); },
+                /invalid name/
+            );
 
-            assert.throws(function() {
-                app.use(function() {});
-            });
+            assert.throws(
+                function() { app.use(function() {}); },
+                /invalid name/
+            );
         });
 
         it('should throw an invalid-module error', function() {
             var app = new Sire();
 
-            assert.throws(function() {
-                app.use('A');
-            });
+            var A;
+            var B = null;
+
+            assert.throws(
+                function() { app.use('A', A); },
+                /invalid module/
+            );
+
+            assert.throws(
+                function() { app.use('B', B); },
+                /invalid module/
+            );
         });
 
         it('should register a module', function() {
