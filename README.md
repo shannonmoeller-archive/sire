@@ -38,14 +38,14 @@ With [Component](http://component.io):
 
 ## API for Sire Implementors
 
-### `_start( module, [options] ) : Sire`
+### `_start( module, [options] ) : Object`
 
 - `module` `Object | Function`
 - `options` `Object` _(optional)_
 
 Note: **Implement this function, but do NOT call it directly.**
 
-### `_stop( [instance] ) : Sire`
+### `_stop( [instance] )`
 
 - `instance` `Object` _(optional)_
 
