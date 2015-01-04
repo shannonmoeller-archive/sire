@@ -15,7 +15,7 @@ describe('Sire', function() {
         });
     });
 
-    describe('start()', function() {
+    describe('.prototype.start()', function() {
         it('should start all registered modules', function() {
             function Bar() {}
             function Foo() {}
@@ -67,8 +67,9 @@ describe('Sire', function() {
         });
     });
 
-    describe('_start()', function() {
+    describe('.prototype._start()', function() {
         it('should throw a not-implemented error', function() {
+            var expect = 0;
             var app = new Sire();
 
             app._modules = {
@@ -76,16 +77,20 @@ describe('Sire', function() {
             };
 
             assert.throws(function() {
+                expect++;
                 app._start();
             });
 
             assert.throws(function() {
+                expect++;
                 app.start();
             });
+
+            assert.equal(expect, 2);
         });
     });
 
-    describe('stop()', function() {
+    describe('.prototype.stop()', function() {
         it('should stop all started modules', function() {
             var bar = { a: 1 };
             var foo = { b: 2 };
@@ -124,7 +129,7 @@ describe('Sire', function() {
         });
     });
 
-    describe('_stop()', function() {
+    describe('.prototype._stop()', function() {
         it('should throw a not-implemented error', function() {
             var app = new Sire();
 
@@ -142,7 +147,7 @@ describe('Sire', function() {
         });
     });
 
-    describe('use()', function() {
+    describe('.prototype.use()', function() {
         it('should throw an invalid-name error', function() {
             var app = new Sire();
 

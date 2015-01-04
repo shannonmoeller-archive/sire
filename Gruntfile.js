@@ -26,14 +26,21 @@ module.exports = function(grunt) {
                 options: {
                     standalone: '<%= pkg.name %>'
                 },
-                src: ['lib/**/*.js'],
+                src: 'lib/**/*.js',
                 dest: 'index.js'
+            },
+            cover: {
+                options: {
+                    transform: ['coverify']
+                },
+                src: 'test/**/*-spec.js',
+                dest: 'test/cover.js'
             },
             test: {
                 options: {
                     debug: true
                 },
-                src: ['test/**/*-spec.js'],
+                src: 'test/**/*-spec.js',
                 dest: 'test/index.js'
             }
         },
@@ -43,8 +50,11 @@ module.exports = function(grunt) {
                 reporter: 'spec',
                 ui: 'bdd'
             },
-            all: {
-                src: 'test/index.js'
+            cover: {
+                src: '<%= browserify.cover.dest %>'
+            },
+            test: {
+                src: '<%= browserify.test.dest %>'
             }
         },
 
@@ -63,8 +73,9 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('default', ['lint', 'build', 'test']);
+    grunt.registerTask('default', ['lint', 'test', 'build']);
     grunt.registerTask('lint', ['jshint']);
-    grunt.registerTask('build', ['browserify']);
-    grunt.registerTask('test', ['simplemocha']);
+    grunt.registerTask('build', ['browserify:build']);
+    grunt.registerTask('cover', ['browserify:cover', 'simplemocha:cover']);
+    grunt.registerTask('test', ['browserify:test', 'simplemocha:test']);
 };
