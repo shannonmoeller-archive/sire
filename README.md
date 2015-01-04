@@ -53,40 +53,42 @@ Note: **Implement this function, but do NOT call it directly.**
 
 ## Example
 
-    var Sire = require('sire');
+```js
+var Sire = require('sire');
 
-    function Foo(options, parent) {
-        this.options = options || {};
-        this.parent = parent;
-    }
+function Foo(options, parent) {
+    this.options = options || {};
+    this.parent = parent;
+}
 
-    function Bar(options, parent) {
-        this.options = options || {};
-        this.parent = parent;
-    }
+function Bar(options, parent) {
+    this.options = options || {};
+    this.parent = parent;
+}
 
-    function App() {
-        Sire.call(this);
+function App() {
+    Sire.call(this);
 
-        return this
-            .use(Foo)
-            .use(Bar)
-            .start();
-    }
+    return this
+        .use(Foo)
+        .use(Bar)
+        .start();
+}
 
-    App.prototype = Object.create(Sire.prototype);
-    App.prototype.constructor = App;
+App.prototype = Object.create(Sire.prototype);
+App.prototype.constructor = App;
 
-    App.prototype._start = function(Module, options) {
-        // create instance
-        return new Module(options, this);
-    };
+App.prototype._start = function(Module, options) {
+    // create instance
+    return new Module(options, this);
+};
 
-    App.prototype._stop = function(instance) {
-        // destroy instance
-    };
+App.prototype._stop = function(instance) {
+    // destroy instance
+};
 
-    var app = new App();
+var app = new App();
+```
 
 ## Test
 
